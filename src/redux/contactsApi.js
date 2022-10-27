@@ -9,12 +9,33 @@ export const contactsApi = createApi({
   }),
   tagTypes: ['Contacts'],
   endpoints: (builder) => ({
-    getPokemonByName: builder.query<Pokemon, string>({
-      query: (name) => `pokemon/${name}`,
-    }),
+    getContacts: builder.query({
+      query: () => `/contacts`,
+      providesTags: ['Contacts'],
+      }),
+    deleteContact: builder.mutation({
+      query: contactId => ({
+        url: `/contacts/${contactId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Contacts'],
+        }),
+    addContact: builder.mutation({
+      query: newContact => ({
+        url: '/contacts',
+        method: 'POST',
+        body: {
+          name: newContact.name,
+          phone: newContact.phone,
+        },
+      }), 
+      invalidatesTags: ['Contacts'],
   }),
-})
+}),
+});
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const { useGetPokemonByNameQuery } = pokemonApi
+export const {
+  useGetContactsQuery,
+  useDeleteContactMutation,
+  useAddContactMutation,
+} = contactsApi;

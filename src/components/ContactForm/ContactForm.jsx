@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Form, Label, Input, Button } from './ContactForm.styled';
 import { Report } from 'notiflix/build/notiflix-report-aio';
-import {  useGetContactsQuery,useAddContactMutation,} from 'redux/contactsApi';
+import { useGetContactsQuery, useAddContactMutation, } from 'redux/contactsApi';
+import { nanoid } from 'nanoid';
    
 
 export function ContactForm() {
@@ -14,14 +15,18 @@ export function ContactForm() {
   
   const handleSubmit = e => {
     e.preventDefault();
+
+      const newContact = {
+      id: nanoid(),
+      name,
+      number,
+    };
  
         data.some(contact => contact.name.toLowerCase() === name.toLowerCase())
       ? Report.warning(`${name}`,
         'This user is already in contacts.','OK')
-          : addContact({
-          name: name,
-          phone: number,
-          });
+          : addContact((newContact));
+   
     
         reset();
           };
@@ -31,8 +36,8 @@ export function ContactForm() {
     setNumber ('');
     };
   
-    const handleChange = evt => {
-    const { name, value } = evt.target;
+    const handleChange = e => {
+    const { name, value } = e.target;
     switch (name) {
       case 'name':
         setName(value);

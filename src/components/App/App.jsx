@@ -21,7 +21,7 @@ export function App() {
         </Section>
         <Section title="Contacts">
           <Titleh2>Contacts</Titleh2>
-          <Filter filter={filter} handleChange={handleChange}  />
+          <Filter filter={filter} handleChange={handleChange} />
           <ContactList filter={filter}/>
         </Section>
       </Container>

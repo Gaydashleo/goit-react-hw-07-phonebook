@@ -12,16 +12,14 @@ export function ContactList({filter}) {
 
   if (filteredContactList) {
    return (
-    <List>
-       {filteredContactList.map(({ id, name, number }) => (
-        <li key={id}>
-            <ContactItem
-                    id={id}
+     <List>
+      {filteredContactList.map(({ id, name, number }) => (
+        <ContactItem
+          key={id}
+          id={id}
           name={name}
           number={number}
-        />
-        </li>
-       
+          />
       ))}
     </List>
   );

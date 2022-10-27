@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Form, Label, Input, Button } from './ContactForm.styled';
 import { Report } from 'notiflix/build/notiflix-report-aio';
-import { nanoid } from 'nanoid';
 import {  useGetContactsQuery,useAddContactMutation,} from 'redux/contactsApi';
    
 
@@ -9,25 +8,20 @@ export function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const { contacts } = useGetContactsQuery();
+  const { data } = useGetContactsQuery();
   const [addContact] = useAddContactMutation();
 
-  const onChangeName = e => setName(e.currentTarget.value);
-  const onChangeNumber = e => setNumber(e.currentTarget.value);
-
-  const onSubmitForm = e => {
+  
+  const handleSubmit = e => {
     e.preventDefault();
-
-    const newContact = {
-      id: nanoid(),
-      name,
-      number,
-    };
-
-        contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase())
+ 
+        data.some(contact => contact.name.toLowerCase() === name.toLowerCase())
       ? Report.warning(`${name}`,
         'This user is already in contacts.','OK')
-      : addContact(newContact);
+          : addContact({
+          name: name,
+          phone: number,
+          });
     
         reset();
           };
@@ -35,20 +29,36 @@ export function ContactForm() {
     const reset = () => {
     setName ('');
     setNumber ('');
-  };
+    };
   
+    const handleChange = evt => {
+    const { name, value } = evt.target;
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+
+      case 'number':
+        setNumber(value);
+        break;
+
+      default:
+        break;
+    }
+  };
+
     return (
-      <Form onSubmit={onSubmitForm}>
+      <Form onSubmit={handleSubmit}>
         <Label >
           Name
           <Input
             type="text"
             name="name"
             value={name}
-            onChange={onChangeName}
+            onChange={handleChange}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
+            
           />
         </Label>
 
@@ -58,10 +68,10 @@ export function ContactForm() {
             type="tel"
             name="number"
             value={number}
-            onChange={onChangeNumber}
+            onChange={handleChange}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
+            
           />
         </Label>
 

@@ -3,7 +3,7 @@ import { Form, Label, Input, Button } from './ContactForm.styled';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { nanoid } from 'nanoid';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact, getContacts } from 'redux/contacts-slice';
+import { addContact, getContacts } from '../../Api/contacts-api';
 
 export function ContactForm() {
   const [name, setName] = useState('');

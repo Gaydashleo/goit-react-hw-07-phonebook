@@ -1,14 +1,16 @@
 import PropTypes from 'prop-types';
+import { useDeleteContactMutation } from 'redux/contactsApi';
 import { Item, Button } from './ContactItem.styled';
 
-export const ContactItem = ({ id, name, number, onDeleteContact }) => {
+export const ContactItem = ({ id, name, number, }) => {
+  const [onDeleteContact, { isLoading: isDeleting }] = useDeleteContactMutation;
   return (
     <Item key={id}>
       <p>
         {name}: {number}
       </p>
       <Button type="button" onClick={onDeleteContact}>
-        Delete
+        {isDeleting ? 'Deleting...' : 'Delete'}
       </Button>
     </Item>
   );

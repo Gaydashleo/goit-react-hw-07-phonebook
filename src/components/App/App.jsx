@@ -22,7 +22,7 @@ export function App() {
         <Section title="Contacts">
           <Titleh2>Contacts</Titleh2>
           <Filter filter={filter} handleChange={handleChange} />
-          <ContactList filter={filter}/>
+          <ContactList />
         </Section>
       </Container>
     );

@@ -3,15 +3,15 @@ import { ContactForm } from 'components/ContactForm/ContactForm';
 import {Filter}  from 'components/Filter/Filter';
 import { ContactList } from 'components/ContactList/ContactList';
 import { Container, Section, Titleh1, Titleh2 } from './App.styled';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 
 export function App() {
-  const [filter, setFilter] = useState('');
+  // const [filter, setFilter] = useState('');
 
-    const handleChange = e => {
-    setFilter(e);
-    };
+  //   const handleChange = e => {
+  //   setFilter(e);
+  //   };
   
     return (
       <Container>
@@ -21,7 +21,7 @@ export function App() {
         </Section>
         <Section title="Contacts">
           <Titleh2>Contacts</Titleh2>
-          <Filter filter={filter} handleChange={handleChange} />
+          <Filter  />
           <ContactList />
         </Section>
       </Container>

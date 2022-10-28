@@ -1,8 +1,13 @@
-
-import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { Label, Input } from './Filter.styled';
 
-export  function Filter({ filter, handleChange }) {
+export function Filter () {
+   const [filter, setFilter] = useState('');
+
+    const handleChange = e => {
+    setFilter(e);
+    };
+  
   return (
     <Label>
       Find contacts by name
@@ -17,8 +22,7 @@ export  function Filter({ filter, handleChange }) {
   );
 }
 
-Filter.propTypes = {
-  filter: PropTypes.string,
-  handleChange: PropTypes.func,
-};
+
+
+
 

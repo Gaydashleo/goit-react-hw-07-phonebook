@@ -19,8 +19,4 @@ export const Input = styled.input`
     0 3em 3em -0.25em rgba(100,100,100,0.2);
 `;
 
-export const Text = styled.p`
-  font-weight: 600;
-  color: var(--main-text-color);
-  margin-bottom: 5px;
-`;
+

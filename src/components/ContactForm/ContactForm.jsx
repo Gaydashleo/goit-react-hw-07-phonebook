@@ -7,7 +7,7 @@ import { nanoid } from 'nanoid';
 
 export function ContactForm() {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
 
   const { data } = useGetContactsQuery();
   const [addContact] = useAddContactMutation();
@@ -19,7 +19,7 @@ export function ContactForm() {
       const newContact = {
       id: nanoid(),
       name:name,
-      phone:number,
+      phone:phone,
     };
  
         data.some(contact => contact.name.toLowerCase() === name.toLowerCase())
@@ -33,7 +33,7 @@ export function ContactForm() {
     
     const reset = () => {
     setName ('');
-    setNumber ('');
+    setPhone ('');
     };
   
     const handleChange = e => {
@@ -44,7 +44,7 @@ export function ContactForm() {
         break;
 
       case 'number':
-        setNumber(value);
+        setPhone(value);
         break;
 
       default:
@@ -72,7 +72,7 @@ export function ContactForm() {
           <Input
             type="tel"
             name="number"
-            value={number}
+            value={phone}
             onChange={handleChange}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"

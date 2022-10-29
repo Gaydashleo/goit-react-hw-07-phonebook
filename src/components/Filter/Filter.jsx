@@ -10,7 +10,7 @@ export function Filter() {
   const dispatch = useDispatch();
 
   const onChangeFilter = e =>
-    dispatch(changeFilter(e.target.value)); 
+    dispatch(changeFilter(e.currentTarget.value)); 
 
   return (
     <Label>

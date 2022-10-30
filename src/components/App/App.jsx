@@ -7,11 +7,6 @@ import { Container, Section, Titleh1, Titleh2 } from './App.styled';
 
 
 export function App() {
-  // const [filter, setFilter] = useState('');
-
-  //   const handleChange = e => {
-  //   setFilter(e);
-  //   };
   
     return (
       <Container>

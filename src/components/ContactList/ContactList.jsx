@@ -1,4 +1,5 @@
 // import PropTypes from 'prop-types';
+import {  getFilter } from 'redux/filter/filter-selector';
 import { useGetContactsQuery } from 'redux/contactsApi'
 import { ContactItem } from 'components/ContactItem/ContactItem';
 import { List } from './ContactList.styled';
@@ -7,7 +8,7 @@ import {useSelector } from 'react-redux';
 
 export const ContactList = () => {
   const { data: contacts, isLoading, error } = useGetContactsQuery();
-  const filter = useSelector(state => state.filter);
+  const filter = useSelector(getFilter);
 
   const filteredContactList = () => {
     if (!filter) {
@@ -29,12 +30,14 @@ export const ContactList = () => {
           id={id}
           name={name}
           phone={phone}
-        />
+                 />
       ))}
       </List>
   );
 };
- 
+
+
+
 
 
 

@@ -12,8 +12,7 @@ export function ContactForm() {
   const { data } = useGetContactsQuery();
   const [addContact] = useAddContactMutation();
 
-  
-  const handleSubmit = e => {
+    const handleSubmit = e => {
     e.preventDefault();
 
       const newContact = {
@@ -21,13 +20,12 @@ export function ContactForm() {
       name:name,
       phone:phone,
     };
- 
+
         data.some(contact => contact.name.toLowerCase() === name.toLowerCase())
       ? Report.warning(`${name}`,
         'This user is already in contacts.','OK')
           : addContact((newContact));
-   
-    
+        
         reset();
           };
     

@@ -1,10 +1,8 @@
-// import PropTypes from 'prop-types';
 import {  getFilter } from 'redux/filter/filter-selector';
 import { useGetContactsQuery } from 'redux/contactsApi'
 import { ContactItem } from 'components/ContactItem/ContactItem';
 import { List } from './ContactList.styled';
 import {useSelector } from 'react-redux';
-
 
 export const ContactList = () => {
   const { data: contacts, isLoading, error } = useGetContactsQuery();
@@ -18,8 +16,7 @@ export const ContactList = () => {
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
   };
-   
-    
+        
   return (
     <List>
       {isLoading && <p> Loading...</p>}
@@ -30,7 +27,7 @@ export const ContactList = () => {
           id={id}
           name={name}
           phone={phone}
-                 />
+        />
       ))}
       </List>
   );

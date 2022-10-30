@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { useDeleteContactMutation } from 'redux/contactsApi';
 import { Button } from './ContactItem.styled';
 
-
 export const ContactItem = ({ id, name, phone }) => {
   const [onDeleteContact, result ] = useDeleteContactMutation();
   return (

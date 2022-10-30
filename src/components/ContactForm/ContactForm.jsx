@@ -10,7 +10,7 @@ export function ContactForm() {
   const [phone, setPhone] = useState('');
 
   const { data } = useGetContactsQuery();
-  const [addContact] = useAddContactMutation();
+  const [addContact, result] = useAddContactMutation();
 
     const handleSubmit = e => {
     e.preventDefault();
@@ -24,10 +24,11 @@ export function ContactForm() {
         data.some(contact => contact.name.toLowerCase() === name.toLowerCase())
       ? Report.warning(`${name}`,
         'This user is already in contacts.','OK')
-          : addContact((newContact));
-        
-        reset();
+          : addContact((newContact)) && reset();
           };
+        
+        // reset();
+        //   };
     
     const reset = () => {
     setName ('');
@@ -78,7 +79,10 @@ export function ContactForm() {
           />
         </Label>
 
-        <Button type="submit">Add contact</Button>
+        <Button
+          type="submit"
+          disabled={result.isLoading}
+        >Add contact</Button>
       </Form>
     );
   }
